@@ -580,12 +580,10 @@ public class KontoauszugList extends UmsatzList
       if (typ != null && !matches(typ, u, subKategorien))
         continue;
       
-      if (unchecked)
-      {
-        // Nur ungepruefte anzeigen
-        if (!u.isChecked())
-          continue;
-      }
+      // Wenn nur ungepruefte angezeigt werden sollen, gepruefte ueberspringen
+      if (unchecked && u.hasFlag(Umsatz.FLAG_CHECKED))
+        continue;
+      
       result.add(u);
     }
     return result;

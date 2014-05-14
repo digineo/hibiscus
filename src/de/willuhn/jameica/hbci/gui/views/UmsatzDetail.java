@@ -56,7 +56,7 @@ public class UmsatzDetail extends AbstractUmsatzDetail
         checked.setEnabled(false); // nur einmal moeglich
       }
     },u,false,"emblem-default.png");
-    checked.setEnabled(u.isBooked() && !u.isChecked());
+    checked.setEnabled(!u.hasFlag(Umsatz.FLAG_NOTBOOKED) && !u.hasFlag(Umsatz.FLAG_CHECKED));
     buttons.addButton(checked);
     
     Button ab = null;
@@ -78,7 +78,7 @@ public class UmsatzDetail extends AbstractUmsatzDetail
     buttons.addButton(ab);
 
     Button edit = new Button(i18n.tr("Bearbeiten"),new de.willuhn.jameica.hbci.gui.action.UmsatzDetailEdit(),u,false,"text-x-generic.png");
-    edit.setEnabled(u.isBooked());
+    edit.setEnabled(!u.hasFlag(Umsatz.FLAG_NOTBOOKED));
     buttons.addButton(edit);
     
     Button store = new Button(i18n.tr("Speichern"),new Action()
@@ -88,7 +88,7 @@ public class UmsatzDetail extends AbstractUmsatzDetail
         getControl().handleStore();
       }
     },null,false,"document-save.png");
-    store.setEnabled(u.isBooked());
+    store.setEnabled(!u.hasFlag(Umsatz.FLAG_NOTBOOKED));
     buttons.addButton(store);
 
     buttons.paint(getParent());

@@ -239,7 +239,7 @@ public class UmsatzList extends ContextMenu implements Extendable
         try
         {
           for(Umsatz u : umsaetze){
-            if (!u.isBooked())
+            if (u.hasFlag(Umsatz.FLAG_NOTBOOKED))
               return false;
           }
         }

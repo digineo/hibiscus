@@ -108,7 +108,7 @@ public class UmsatzDetailControl extends AbstractControl {
     if (this.kommentar != null)
       return this.kommentar;
     this.kommentar = new TextAreaInput(this.getUmsatz().getKommentar());
-    this.kommentar.setEnabled(getUmsatz().isBooked());
+    this.kommentar.setEnabled(!getUmsatz().hasFlag(Umsatz.FLAG_NOTBOOKED));
     return this.kommentar;
   }
   
@@ -193,7 +193,7 @@ public class UmsatzDetailControl extends AbstractControl {
     // noch angeboten wird, der User nachtraeglich den Kat-Typ geaendert hat.
     this.umsatzTyp = new UmsatzTypInput(ut,typ);
     
-    this.umsatzTyp.setEnabled(u.isBooked());
+    this.umsatzTyp.setEnabled(!u.hasFlag(Umsatz.FLAG_NOTBOOKED));
     return this.umsatzTyp;
   }
 
